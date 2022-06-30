@@ -1,0 +1,3 @@
+FEATURES:
+    - annual income (shows yearly income per year)
+    - multiple jobs / tabs 
