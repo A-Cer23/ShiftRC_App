@@ -115,10 +115,14 @@ def calculate_report(start_date, end_date, wage):
         total_time += end_time - start_time
         total_shifts += 1
     total_pay = (total_time.total_seconds()/60/60) * wage
+    total_hours = int(total_time.total_seconds() / 3600)
+    total_minutes = int(total_time.total_seconds() / 60) % 60
     report = {
         'total_pay': total_pay,
         'total_shifts': total_shifts,
-        'total_time': total_time.total_seconds()/60/60,
+        'total_time': {'total_hours': total_hours, 
+                        'total_minutes': total_minutes,
+                        },      #total_time.total_seconds()/60/60,
         'wage':wage
     }
     return report
