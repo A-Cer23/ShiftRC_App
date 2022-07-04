@@ -1,16 +1,46 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Shiftreport
 from .forms import Pay_Period_Form, Shiftreport_Form 
-from django.http import Http404
+from django.views import View
+from django.views.generic.list import ListView
 from datetime import datetime, date, timedelta
 
 # Create your views here.
-def index(request):
-    shiftreport_list = Shiftreport.objects.order_by('-date')
-    context = {
-        'shiftreport_list': shiftreport_list,
+class Index(View):
+    template_name = 'shiftreports/index.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, {})
+
+
+class Shiftreports(ListView):
+    model = Shiftreport
+    paginate_by = 10
+    template_name = 'shiftreports/shiftreports.html'
+    ordering = ['-date']
+
+# def shiftreports(request):
+#     shiftreport_list = Shiftreport.objects.order_by('-date')
+#     context = {
+#         'shiftreport_list': shiftreport_list,
+#         }
+#     return render(request, 'shiftreports/shiftreports.html', context)
+
+class Addsr(View):
+    template_name = 'shiftreports/srform.html'
+    form_class = Shiftreport_Form
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        context = {
+            'add_updt': 'Add',
+            'form': form,
         }
-    return render(request, 'shiftreports/index.html', context)
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            pass
 
 def addsr(request):
     if request.method == "POST":
@@ -53,11 +83,8 @@ def updatesr(request, shiftreport_id):
     return render(request, 'shiftreports/srform.html', context)
 
 def deletesr(request, shiftreport_id):
-    try:
-        sr = Shiftreport.objects.get(pk=shiftreport_id)
-        sr.delete()
-    except Shiftreport.DoesNotExist:
-        raise Http404("Shiftreport does not exist")
+    sr = get_object_or_404(Shiftreport, pk=shiftreport_id)
+    sr.delete()
     return redirect('/')
 
 
@@ -77,9 +104,6 @@ def payperiod(request, wage=15):
             'form': form,
         }
         return render(request, 'shiftreports/payperiod.html', context)
-
-def report(request):
-    pass
 
 def calculate_report(start_date, end_date, wage):
     shiftreports = Shiftreport.objects.filter(date__gte=start_date, date__lte=end_date)

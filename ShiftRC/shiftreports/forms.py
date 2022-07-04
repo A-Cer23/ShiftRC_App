@@ -1,5 +1,3 @@
-from email.policy import default
-from unittest.util import _MAX_LENGTH
 from django import forms
 
 class Shiftreport_Form(forms.Form):

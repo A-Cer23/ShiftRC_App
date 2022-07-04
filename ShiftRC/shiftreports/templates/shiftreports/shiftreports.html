@@ -1,0 +1,66 @@
+{% extends 'shiftreports/base.html' %}
+
+{% block title %}Shiftreports{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row p-3">
+            <div class="d-flex justify-content-end">
+                <a href="{% url 'shiftreports:addsr' %}" role="button" class="btn btn-outline-secondary btn-sm">Add a Shiftreport</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {%if shiftreport_list %}
+                <table class="table table-light table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for shiftreport in shiftreport_list%}
+                                <tr>
+                                    <td>{{shiftreport.date}}</td>
+                                    <td>{{shiftreport.start_time}}</td>
+                                    <td>{{shiftreport.end_time}}</td>
+                                    <td><a href="{% url 'shiftreports:updatesr' shiftreport.id %}">U</a></td>
+                                    <td><a href="{% url 'shiftreports:deletesr' shiftreport.id %}">X</a></td>
+                                </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+                {%else%}
+                        <p>No Shiftreports to show</p
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1" class="pr-3">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="pr-1">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="pl-1">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="pl-3">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+    
+    <div class="container pt-3 d-flex justify-content-center">
+        <a href="{% url 'shiftreports:payperiod' %}" role="button" class="btn btn-outline-secondary btn-sm">Select Pay Period</a>
+    </div>
+{% endblock %}
