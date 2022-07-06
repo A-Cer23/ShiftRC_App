@@ -5,10 +5,9 @@ app_name = 'shiftreports'
 urlpatterns = [
     path('', views.Index.as_view(), name='index'),
     path('shiftreports/', views.Shiftreports.as_view(), name='shiftreports'),
-    # path('shiftreports/', views.shiftreports, name='shiftreports'),
-    path('shiftreports/add/', views.addsr, name='addsr'),
-    path('shiftreports/delete/<int:shiftreport_id>', views.deletesr, name='deletesr'),
-    path('shiftreports/update/<int:shiftreport_id>', views.updatesr, name='updatesr'),
-    path('shiftreports/payperiod/', views.payperiod, name='payperiod'),
-    #path('report/',)
+    path('shiftreports/add/', views.Addsr.as_view(), name='addsr'),
+    path('shiftreports/update/<int:shiftreport_id>', views.Updatesr.as_view(), name='updatesr'),
+    # path('shiftreports/delete/<int:shiftreport_id>', views.deletesr, name='deletesr'),
+    path('shiftreports/delete/<int:shiftreport_id>', views.Deletesr.as_view(), name='deletesr'),
+    path('shiftreports/payperiod/', views.Payperiod.as_view(), name='payperiod'),
 ]

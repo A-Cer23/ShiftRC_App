@@ -18,6 +18,9 @@
                             <th>Date</th>
                             <th>Start Time</th>
                             <th>End Time</th>
+                            <th>Wage/hr</th>
+                            <th>Total Time</th>
+                            <th>Total Pay</th>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
@@ -28,9 +31,17 @@
                                     <td>{{shiftreport.date}}</td>
                                     <td>{{shiftreport.start_time}}</td>
                                     <td>{{shiftreport.end_time}}</td>
+                                    <td>${{shiftreport.wage}}</td>
+                                    <td>{{shiftreport.get_total_hours_minutes}}</td>
+                                    <td>${{shiftreport.total_pay}}</td>
                                     <td><a href="{% url 'shiftreports:updatesr' shiftreport.id %}">U</a></td>
                                     <td><a href="{% url 'shiftreports:deletesr' shiftreport.id %}">X</a></td>
+                                    <div class="collapse mt-3" id="collapsesr">
+                                        Total Hours: {{shiftreport.total_hours}}
+                                        Total Pay: {{shiftreport.total_pay}}
+                                    </div>
                                 </tr>
+                                
                         {%endfor%}
                     </tbody>
                 </table>
