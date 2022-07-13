@@ -1,20 +1,17 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Select Pay Period</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    </head>
-    <body>
-        <div class="container">
-            <p class="text-center fs-1">Select Pay Period</p>
-        </div>
-        <div class="container text-center fs-6 pt-5">
-            <form method="post">
-                {% csrf_token %}
-                {{form.as_p}}
-                <input type="submit" value="Calculate">
-            </form>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    </body>
-</html>
+{% extends 'shiftreports/base.html' %}
+
+{% block title %}Select Pay Period{% endblock %}
+
+{% block content %}
+    <div class="container pt-3">
+        <h1 class="text-center">Select Pay Period</h1>
+    </div>
+    <div class="container text-center fs-6 pt-5">
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Calculate">
+        </form>
+    </div>
+{% endblock %}
+        
