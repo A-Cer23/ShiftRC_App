@@ -1,0 +1,4 @@
+user creation
+user login
+user permissions and have user creation add permissions to user / add groups of permissions /
+each user get their own shiftreports to manipulate and use service
