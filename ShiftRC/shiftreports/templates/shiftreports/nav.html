@@ -10,10 +10,10 @@
             <a class="nav-link" href="{% url 'shiftreports:shiftreports' %}">Shiftreports</a>
           </li>
           <li class="nav-items">
-            <a class="nav-link" href="">Login</a>
+            <a class="nav-link" href="{% url 'users:login' %}">Login</a>
           </li>
           <li class="nav-items">
-            <a class="nav-link" type="button">Signup</a>
+            <a class="nav-link" type="button" href="{% url 'users:create' %}">Signup</a>
           </li>
         </ul>
       </div>
